@@ -1,0 +1,151 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #DBA7DA 10%, #E54FE2 46%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Press Start 2P', monospace;
+}
+#menu{
+    text-align: center;
+}
+#mensagem{
+    font-size: x-large;
+    font-style: italic;
+}
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+
+#mensagem {
+  animation: piscar 1.5s infinite;
+}
+
+img{
+    width: 576px;
+    height: 321px;
+    margin-top: -15%;
+    margin-bottom: 15%;
+}
+@keyframes flutuar {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-7px) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-7px) rotate(6deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+img {
+  animation: flutuar 1.6s ease-in-out infinite;
+}
+button{
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: white;
+  font-style: italic;
+  font-family: 'Press Start 2P', monospace;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 transparent;
+}
+button:hover {
+  background-color: #000000d4;
+  color: #E54FE2;
+  box-shadow: 0 0 10px #6a0dad, 0 0 20px #6a0dad;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+.escondido{
+    display: none;
+}
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+    transform: translateY(90px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.painel {
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.oculto {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animar-aparecer {
+  animation: aparecer 0.5s ease-out forwards;
+}
+@keyframes tremer {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(2px, -2px); }
+  50%  { transform: translate(-2px, 2px); }
+  75%  { transform: translate(2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+button.tremendo {
+  animation: tremer 0.2s;
+}
+
+/* Fundo animado */
+#fundo-animado {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Estilo base para os elementos animados */
+.elemento-voador {
+  position: absolute;
+  color: #fe98f4; /* Roxo com transparência */
+  font-size: 34px;
+  animation: voar 2.5s linear forwards;
+}
+
+/* Animação voando na diagonal e sumindo */
+@keyframes voar {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(500px, -500px);
+    opacity: 0;
+  }
+}
