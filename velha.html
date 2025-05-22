@@ -12,7 +12,7 @@
     <audio id="musica-fundo" src="Banco de Soms/back_music.mp3" loop></audio>
     <div id="fundo-animado"></div>
         <div id="menu">
-            <img src="Banco de Imagens/Logo.png" alt="logo">
+            <img src="Banco de Imagens/Logo 1.0.png" alt="logo">
             <p id="mensagem">[ pressione barra de espaço ]</p>
 
             <div id="options" class="escondido">
@@ -23,15 +23,41 @@
             </div>
     </div>
     <div id="painel-sobre" class="painel oculto">
-        <h2>Sobre o Jogo</h2>
-        <p>Aqui vai vir as especificações especiais de como o jogo funciona asdfghjklçkjhgfds</p>
+        <h2>[Sobre o Jogo]</h2>
+        <p>Aqui você vai encontrar dois modos diferentes de jogo:
+            O modo padrão que é um simples jogo da velha tradicional e o modo ultimate
+            Que diferente do normal,não é um 3x3 mas sim um 5x5,com habilidades que buscam deixar o jogo mais competitivo
+        </p>
         <button onclick="fecharPainel()">Voltar</button>
     </div>
-       <div id="painel-creditos" class="painel oculto">
-        <h2>Créditos</h2>
-        <p>Eu fiz tudo nessa poha</p>
+    <div id="painel-creditos" class="painel oculto">
+    <h2>[Créditos]</h2>
+    <p>Cauã Lobato é o nome da fera<br>
+        Música:Eu<br>
+        Desenvolvedor:Eu<br>
+        Artista:Adivinha só? Eu de novo
+    </p>  
         <button onclick="fecharPainel()">Voltar</button>
     </div>
+        <div id="painel-opcoes" class="painel oculto">
+        <h2>[Opções]</h2>
+        <label for="volume-som">Volume dos Efeitos:</label>
+        <input type="range" id="volume-som" min="0" max="1" step="0.1" value="0.2">
+
+        <br><br>
+
+        <label for="volume-musica">Volume da Música de Fundo:</label>
+        <input type="range" id="volume-musica" min="0" max="1" step="0.1" value="0.9">
+
+        <br><br>
+
+        <label for="selecionar-idioma">Idioma</label>
+        <select id="selecionar-idioma">
+            <option value="pt">Português</option>
+            <option value="en">English</option>
+        </select>
+        <button onclick="fecharPainel()">Voltar</button>
+    </div> 
     <script src="menu_velha.js"></script>
 </body>
 </html>

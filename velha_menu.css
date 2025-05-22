@@ -114,7 +114,7 @@ button:hover {
 }
 
 button.tremendo {
-  animation: tremer 0.2s;
+  animation: tremer 0.3s;
 }
 
 /* Fundo animado */
@@ -127,10 +127,10 @@ button.tremendo {
   pointer-events: none;
 }
 
-/* Estilo base para os elementos animados */
+
 .elemento-voador {
   position: absolute;
-  color: #fe98f4; /* Roxo com transparência */
+  color: #fe98f4; 
   font-size: 34px;
   animation: voar 2.5s linear forwards;
 }
@@ -138,14 +138,18 @@ button.tremendo {
 /* Animação voando na diagonal e sumindo */
 @keyframes voar {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotate(0deg);
     opacity: 1;
   }
   60% {
     opacity: 1;
   }
   100% {
-    transform: translate(500px, -500px);
+    transform: translate(500px, -500px) rotate(720deg);
     opacity: 0;
   }
 }
+p{
+  pad: 2500px;
+}
+
