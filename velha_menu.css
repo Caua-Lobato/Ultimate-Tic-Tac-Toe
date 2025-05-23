@@ -66,16 +66,41 @@ button{
   text-transform: uppercase;
   box-shadow: 0 0 0 transparent;
 }
-#Uttt-logo{
-  transition: all 0.5s ease;
-  display: block;
-  margin: 0 auto;
-}
-.menu-topo #Uttt-logo{
+.logo-topo {
   position: absolute;
-  top: 20px;
-  left: 50%;
+  top: 30px;
+  left: 36vw;
   transform: translateX(-50%);
+  transition: top 0.5s ease, width 0.5s ease, height 0.5s ease;
+  width: 380px;
+  height: 225px;
+}
+.escondido {
+  display: none !important;
+}
+#painel-modos{
+  margin-top: 20vh;
+}
+
+#botoes-modo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+#painel-padrao{
+    margin-top: 20vh;
+}
+
+#botoes-padrao{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 button:hover {
   background-color: #000000d4;

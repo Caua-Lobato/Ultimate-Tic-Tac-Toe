@@ -113,6 +113,13 @@ function fecharPainel() {
   const todosOsPaineis = document.querySelectorAll(".painel");
   todosOsPaineis.forEach(painel => painel.classList.add("oculto"));
 
+  // Volta para o menu principal
+  options.classList.remove("escondido");
+
+  // Volta a logo para o centro
+  const logo = document.getElementById("Uttt-logo");
+  logo.classList.remove("logo-topo");
+
   options.classList.remove("escondido");
 }
 
@@ -189,20 +196,31 @@ document.getElementById("modo-padrao").addEventListener("click", () => {
 });
 
 botaoJogar.addEventListener("click", () => {
-  options.classList.add("escondido");
   painelModos.classList.remove("oculto");
+  
+  // Move a logo para o topo
+  const logo = document.getElementById("Uttt-logo");
+  logo.classList.add("logo-topo");
+
+  options.classList.add("escondido");
 });
 
 document.getElementById("pvp").addEventListener("click", () => {
   painelPadrao.classList.add("oculto");
   painelJogo.classList.remove("oculto");
+
+  const logo = document.getElementById("Uttt-logo");
+  logo.classList.add("escondido")
+  
   sortearPrimeiroJogador();
 });
 
-// Sorteio da moeda
 function sortearPrimeiroJogador() {
-  const resultado = Math.random() < 0.5 ? "Jogador 1" : "Jogador 2";
+  const resultado = Math.random() < 0.5 ? "Jogador ✖" : "Jogador 〇";
   vezTexto.textContent = `${resultado} começa!`;
-  // Aqui você pode definir uma variável como `jogadorAtual = 1 ou 2`
-  // e iniciar o jogo
+
+  const painelMoeda = document.getElementById("painel-moeda");
+  const animacaoMoeda = document.getElementById("animacao-moeda");
+
+  
 }
