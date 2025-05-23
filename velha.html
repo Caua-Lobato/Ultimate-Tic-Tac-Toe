@@ -13,7 +13,7 @@
     <div id="fundo-animado"></div>
         <div id="menu">
             <img id="Uttt-logo" src="Banco de Imagens/Logo 1.0.png" alt="logo">
-            <p id="mensagem">[ pressione barra de espaço ]</p>
+            <p id="mensagem">[   pressione barra de espaço ]</p>
 
             <div id="options" class="escondido">
                 <button id="btn-jogar">Jogar</button>
@@ -51,7 +51,7 @@
 
         <br><br>
 
-        <label for="selecionar-idioma">Idioma</label>
+        <label id="selecao-idioma" for="selecionar-idioma">Idioma</label>
         <select id="selecionar-idioma">
             <option value="pt">Português</option>
             <option value="en">English</option>
@@ -74,12 +74,15 @@
         </div>
         <button onclick="fecharPainel()">Voltar</button>
     </div>
+    <div id="painel-moeda" class="painel oculto">
+        <img id="animacao-moeda" src="Banco de Imagens/Cartas/pixilart-drawing.gif" alt="Animação da moeda">
+    </div>
+
+    <p id="vez-texto"></p>
+
     <div id="painel-jogo" class="painel oculto">
-        <h2 id="vez-texto">Quem Começa</h2>
-
-        <div id="tabuleiro"></div>
-
-    </div> 
+    <!-- Conteúdo do jogo -->
+    </div>
     <script src="menu_velha.js"></script>
 </body>
 </html>

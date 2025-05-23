@@ -191,18 +191,24 @@ const painelJogo = document.getElementById("painel-jogo");
 const vezTexto = document.getElementById("vez-texto");
 
 document.getElementById("modo-padrao").addEventListener("click", () => {
-  painelModos.classList.add("oculto");
+  painelModos.classList.add('oculto');
   painelPadrao.classList.remove("oculto");
 });
 
 botaoJogar.addEventListener("click", () => {
-  painelModos.classList.remove("oculto");
-  
-  // Move a logo para o topo
-  const logo = document.getElementById("Uttt-logo");
-  logo.classList.add("logo-topo");
+  somClick.currentTime = 0;
+  somClick.play();
 
-  options.classList.add("escondido");
+  botaoJogar.classList.add('tremendo');
+
+    setTimeout(() => {
+    botaoJogar.classList.remove("tremendo");
+    options.classList.add("escondido");
+    painelModos.classList.remove("oculto");
+      const logo = document.getElementById("Uttt-logo");
+      logo.classList.add("logo-topo");
+  }, 300);
+
 });
 
 document.getElementById("pvp").addEventListener("click", () => {
@@ -222,5 +228,22 @@ function sortearPrimeiroJogador() {
   const painelMoeda = document.getElementById("painel-moeda");
   const animacaoMoeda = document.getElementById("animacao-moeda");
 
-  
+  vezTexto.textContent = "";
+
+  painelMoeda.classList.remove("oculto");
+  if (resultado === "Jogador ✖"){
+    animacaoMoeda.src = "Banco de Imagens/Cartas/pixilart-drawing.gif";
+  }else{
+    animacaoMoeda.src = "Banco de Imagens/Cartas/pixilart-drawing.gif";
+  }
+
+
+    setTimeout(() => {
+      vezTexto.textContent = `${resultado} começa!`;
+
+      setTimeout(() => {
+        painelMoeda.classList.add("oculto");
+        painelJogo.classList.remove("oculto");
+      }, 2000);
+    }, 3000);
 }
