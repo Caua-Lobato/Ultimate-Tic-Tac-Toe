@@ -12,7 +12,7 @@
     <audio id="musica-fundo" src="Banco de Soms/back_music.mp3" loop></audio>
     <div id="fundo-animado"></div>
         <div id="menu">
-            <img src="Banco de Imagens/Logo 1.0.png" alt="logo">
+            <img id="Uttt-logo" src="Banco de Imagens/Logo 1.0.png" alt="logo">
             <p id="mensagem">[ pressione barra de espaço ]</p>
 
             <div id="options" class="escondido">
@@ -42,7 +42,7 @@
         <div id="painel-opcoes" class="painel oculto">
         <h2>[Opções]</h2>
         <label for="volume-som">Volume dos Efeitos:</label>
-        <input type="range" id="volume-som" min="0" max="1" step="0.1" value="0.2">
+        <input type="range" id="volume-som" min="0" max="1" step="0.1" value="0.4">
 
         <br><br>
 
@@ -60,11 +60,24 @@
     </div>
     <div id="painel-modos" class="painel oculto">
         <h2>[ Escolha o modo de jogo ]</h2>
-        <button id="modo-padrao">Padrão</button>
-        <button id="modo-ultimate">Ultimate</button>
+        <div id="botoes-modo">
+            <button id="modo-padrao">Padrão</button>
+            <button id="modo-ultimate">Ultimate</button>
+        </div>
         <button onclick="fecharPainel()">Voltar</button>
     </div>
-     
+    <div id="painel-padrao" class="painel oculto">
+        <h2>[ Modo Padrão ]</h2>
+        <button id="pvp">Player x Player</button>
+        <button id="pvbot">Player x Bot</button>
+        <button onclick="fecharPainel()">Voltar</button>
+    </div>
+    <div id="painel-jogo" class="painel oculto">
+        <h2 id="vez-texto">Quem Começa</h2>
+
+        <div id="tabuleiro"></div>
+
+    </div> 
     <script src="menu_velha.js"></script>
 </body>
 </html>

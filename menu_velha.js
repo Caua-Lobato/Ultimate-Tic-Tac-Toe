@@ -1,14 +1,16 @@
 window.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
-    if (event.code === "Space") {
-      const mensagem = document.getElementById("mensagem");
-      const opcoes = document.getElementById("options");
+  const mensagem = document.getElementById("mensagem");
+  const opcoes = document.getElementById("options");
 
-      mensagem.style.display = "none";
-      opcoes.classList.remove("escondido");
-      opcoes.classList.add("animar-aparecer");
-    }
-  });
+  const mensagemVisivel = getComputedStyle(mensagem).display !== "none";
+
+  if (event.code === "Space" && mensagemVisivel) {
+    mensagem.style.display = "none";
+    opcoes.classList.remove("escondido");
+    opcoes.classList.add("animar-aparecer");
+  }
+});
 });
 function criarElementoVoador() {
   const fundo = document.getElementById("fundo-animado");
@@ -35,7 +37,7 @@ function criarElementoVoador() {
 }
 
 // Criar novos elementos a cada 300ms
-setInterval(criarElementoVoador, 150);
+setInterval(criarElementoVoador, 130);
 
 const botoes = document.querySelectorAll("button");
 
@@ -107,12 +109,12 @@ botaoCreditos.addEventListener("click", () => {
   }, 300); // Delay para dar tempo da animação
 });
 
-function fecharPainel() {  
-  painelSobre.classList.add("oculto");
-  painelCreditos.classList.add("oculto");
+function fecharPainel() {
+  const todosOsPaineis = document.querySelectorAll(".painel");
+  todosOsPaineis.forEach(painel => painel.classList.add("oculto"));
+
   options.classList.remove("escondido");
-  painelOpcoes.classList.add("oculto");
-};
+}
 
 /* area do menu de opcoes*/
 const painelOpcoes = document.getElementById("painel-opcoes");
@@ -129,9 +131,18 @@ seletorVolumeMusica.addEventListener("input", () => {
 });
 
 botaoOpcoes.addEventListener("click", () => {
-  options.classList.add("escondido");
-  painelOpcoes.classList.remove("oculto");
+  somClick.currentTime = 0;
+  somClick.play();
+
+  botaoOpcoes.classList.add("tremendo");
+
+  setTimeout(() => {
+    botaoOpcoes.classList.remove("tremendo");
+    options.classList.add("escondido");
+    painelOpcoes.classList.remove("oculto");
+  }, 300); // mesmo delay de 300ms
 });
+
 
 seletorVolume.addEventListener("input", () => {
   volumeSom = parseFloat(seletorVolume.value);
@@ -165,3 +176,33 @@ botoes.forEach(botao => {
     }, 300);
   });
 });
+
+const botaoJogar = document.getElementById("btn-jogar");
+const painelModos = document.getElementById("painel-modos");
+const painelPadrao = document.getElementById("painel-padrao");
+const painelJogo = document.getElementById("painel-jogo");
+const vezTexto = document.getElementById("vez-texto");
+
+document.getElementById("modo-padrao").addEventListener("click", () => {
+  painelModos.classList.add("oculto");
+  painelPadrao.classList.remove("oculto");
+});
+
+botaoJogar.addEventListener("click", () => {
+  options.classList.add("escondido");
+  painelModos.classList.remove("oculto");
+});
+
+document.getElementById("pvp").addEventListener("click", () => {
+  painelPadrao.classList.add("oculto");
+  painelJogo.classList.remove("oculto");
+  sortearPrimeiroJogador();
+});
+
+// Sorteio da moeda
+function sortearPrimeiroJogador() {
+  const resultado = Math.random() < 0.5 ? "Jogador 1" : "Jogador 2";
+  vezTexto.textContent = `${resultado} começa!`;
+  // Aqui você pode definir uma variável como `jogadorAtual = 1 ou 2`
+  // e iniciar o jogo
+}

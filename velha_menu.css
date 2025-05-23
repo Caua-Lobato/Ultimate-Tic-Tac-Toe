@@ -29,8 +29,6 @@ body{
 img{
     width: 576px;
     height: 321px;
-    margin-top: -15%;
-    margin-bottom: 15%;
 }
 @keyframes flutuar {
   0% {
@@ -67,6 +65,17 @@ button{
   transition: all 0.2s ease;
   text-transform: uppercase;
   box-shadow: 0 0 0 transparent;
+}
+#Uttt-logo{
+  transition: all 0.5s ease;
+  display: block;
+  margin: 0 auto;
+}
+.menu-topo #Uttt-logo{
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 button:hover {
   background-color: #000000d4;
