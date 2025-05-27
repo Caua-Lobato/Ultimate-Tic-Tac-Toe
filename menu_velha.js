@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
 function criarElementoVoador() {
   const fundo = document.getElementById("fundo-animado");
 
-  const simbolos = ["✖", "〇", "△"];
+  const simbolos = ["✖", "〇", "△",];
   const simbolo = simbolos[Math.floor(Math.random() * simbolos.length)];
 
   const elemento = document.createElement("div");
@@ -232,11 +232,12 @@ function sortearPrimeiroJogador() {
 
   painelMoeda.classList.remove("oculto");
   if (resultado === "Jogador ✖"){
-    animacaoMoeda.src = "Banco de Imagens/Cartas/pixilart-drawing.gif";
+    animacaoMoeda.src = "Banco de Imagens/X-moeda.gif";
   }else{
-    animacaoMoeda.src = "Banco de Imagens/Cartas/pixilart-drawing.gif";
+    animacaoMoeda.src = "Banco de Imagens/circulo-moeda.gif";
   }
-
+  animacaoMoeda.style.width = "330px";
+  animacaoMoeda.style.height = "auto";
 
     setTimeout(() => {
       vezTexto.textContent = `${resultado} começa!`;
