@@ -222,8 +222,8 @@ document.getElementById("pvp").addEventListener("click", () => {
 });
 
 function sortearPrimeiroJogador() {
-  const resultado = Math.random() < 0.5 ? "Jogador ✖" : "Jogador 〇";
-  vezTexto.textContent = `${resultado} começa!`;
+  const jogadorSorteado = Math.random() < 0.5 ? "X" : "O";
+  localStorage.setItem("jogadorInicial", jogadorSorteado); // <-- salva quem começa
 
   const painelMoeda = document.getElementById("painel-moeda");
   const animacaoMoeda = document.getElementById("animacao-moeda");
@@ -231,20 +231,19 @@ function sortearPrimeiroJogador() {
   vezTexto.textContent = "";
 
   painelMoeda.classList.remove("oculto");
-  if (resultado === "Jogador ✖"){
-    animacaoMoeda.src = "Banco de Imagens/X-moeda.gif";
-  }else{
-    animacaoMoeda.src = "Banco de Imagens/circulo-moeda.gif";
-  }
+  animacaoMoeda.src = jogadorSorteado === "X" ? 
+    "Banco de Imagens/X-moeda.gif" : 
+    "Banco de Imagens/circulo-moeda.gif";
+
   animacaoMoeda.style.width = "330px";
   animacaoMoeda.style.height = "auto";
 
-    setTimeout(() => {
-      vezTexto.textContent = `${resultado} começa!`;
+  setTimeout(() => {
+    vezTexto.textContent = `Jogador ${jogadorSorteado === "X" ? "✖" : "〇"} começa!`;
 
-      setTimeout(() => {
-        painelMoeda.classList.add("oculto");
-        painelJogo.classList.remove("oculto");
-      }, 2000);
-    }, 3000);
+    setTimeout(() => {
+      // Redireciona para a página do jogo depois da animação
+      window.location.href = "velha_jogo_padrao.html";
+    }, 1000);
+  }, 2000);
 }

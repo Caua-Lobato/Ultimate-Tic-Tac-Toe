@@ -1,0 +1,163 @@
+#corpo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#vez-texto {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  animation: flutuar 2.5s ease-in-out infinite;
+  user-select: none;
+  z-index: 1000;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  font-family: 'Press Start 2P', monospace;
+}
+
+@keyframes flutuar {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-25px);
+  }
+}
+
+#fundo-animado {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+  background: transparent;
+}
+
+.elemento-voador {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0.8;
+  color: white;
+  animation: subirEsumir 2.5s ease forwards;
+  user-select: none;
+}
+
+@keyframes subirEsumir {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-350px);
+    opacity: 0;
+  }
+}
+
+/* Transição com gradiente suave */
+body {
+  position: relative;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+body::before {
+  background: linear-gradient(to top, #FA2020, #fa5757);
+}
+
+body::after {
+  background: linear-gradient(to top, #369BEF, #60c9f6);
+}
+
+body.turno-x::before {
+  opacity: 1;
+}
+
+body.turno-x::after {
+  opacity: 0;
+}
+
+body.turno-o::before {
+  opacity: 0;
+}
+
+body.turno-o::after {
+  opacity: 1;
+}
+
+
+#tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 180px;
+}
+
+.celula {
+  width: 100px;
+  height: 100px;
+  background-color: #e0e0e012;
+  font-size: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 3px solid black;
+  transition: background 0.3s;
+}
+
+.celula:hover {
+  background-color: #00000044;
+}
+
+@keyframes cairDoTeto {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#tabuleiro {
+  opacity: 0;
+  transform: translateY(-100vh);
+  transition: opacity 0.3s ease;
+}
+
+#tabuleiro.animar-cair {
+  animation: cairDoTeto 1s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
