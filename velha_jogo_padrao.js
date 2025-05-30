@@ -1,4 +1,3 @@
-
 const tabuleiro = document.getElementById("tabuleiro");
 const celulas = document.querySelectorAll(".celula");
 const vezTexto = document.getElementById("vez-texto");
@@ -8,6 +7,13 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 document.body.classList.add("modo-jogo");
+
+const musicaFundo = new Audio("Banco de Soms/fundo_padrao.mp3");
+musicaFundo.loop = true;
+musicaFundo.volume = 0.5;
+musicaFundo.play();
+
+let musicaAtiva = true;
 
 const jogadorInicial = localStorage.getItem("jogadorInicial") || "X";
 let turnoX = jogadorInicial === "X"; // quem começa de verdade
@@ -93,7 +99,55 @@ celulas.forEach((celula, index) => {
 
       if (verificarVitoria(simbolo)) {
         vezTexto.textContent = `Jogador ${simbolo} venceu!`;
-        celulas.forEach(c => c.style.pointerEvents = "none"); // desativa cliques
+        vezTexto.classList.add("vitoria"); // aplica estilo animado
+
+        // Toca o som de vitória
+        const musicaVitoria = document.getElementById("audio-vitoria");
+
+        // Reduz o volume da música de fundo suavemente
+        const fadeOut = setInterval(() => {
+          if (musicaFundo.volume > 0.0005) {
+            musicaFundo.volume -= 0.0001;
+          } else {
+            musicaFundo.volume = 0.0005;
+            clearInterval(fadeOut);
+          }
+        }, 50);
+
+        // Toca a música de vitória
+        musicaVitoria.currentTime = 0;
+        musicaVitoria.volume = 0.2;
+        musicaVitoria.play();
+
+        // Quando a música de vitória terminar, volta o volume ao normal
+        musicaVitoria.onended = () => {
+          if (!musicaAtiva) return;
+          
+          const fadeIn = setInterval(() => {
+            if (musicaFundo.volume < 0.5) {
+              musicaFundo.volume += 0.01;
+            } else {
+              musicaFundo.volume = 0.5;
+              clearInterval(fadeIn);
+            }
+          }, 50);
+        };
+
+
+        celulas.forEach(c => c.style.pointerEvents = "none");
+
+      setTimeout(() => {
+          vezTexto.style.animation = "pulsarTexto 2.1s ease-in-out infinite";
+        }, 850); // espera o tempo da rotação
+        return;
+      }
+
+      // Verifica empate
+      const empate = estado.flat().every(c => c !== "");
+      if (empate) {
+        vezTexto.textContent = "Empate!";
+        document.body.classList.remove("turno-x", "turno-o");
+        document.body.classList.add("empate");
         return;
       }
 

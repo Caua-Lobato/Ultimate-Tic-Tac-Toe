@@ -19,6 +19,42 @@
   font-family: 'Press Start 2P', monospace;
 }
 
+#vez-texto.vitoria {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 44px;
+  font-weight: bold;
+  animation-fill-mode: forwards;
+  animation: girarTexto 0.7s linear;
+  color: white;
+  z-index: 10;
+  text-shadow: 9px 7px 3px black;
+  background: transparent;
+}
+
+@keyframes girarTexto {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(1.3);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+  }
+}
+
+@keyframes pulsarTexto {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
 @keyframes flutuar {
   0%, 100% {
     transform: translateX(-50%) translateY(0);
@@ -105,6 +141,10 @@ body.turno-o::after {
   opacity: 1;
 }
 
+body.empate {
+  background-color: #FFD60C;
+  transition: background 0.8s ease;
+}
 
 #tabuleiro {
   display: grid;
