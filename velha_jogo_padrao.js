@@ -200,6 +200,9 @@ btnReiniciar.addEventListener("click", reiniciarComSorteio);
 
 atualizarFundo();
 
+
+const botoes = document.querySelectorAll("button");
+
 botoes.forEach(botao => {
   botao.addEventListener("mouseenter", () => {
     const somHover = new Audio("Banco de Soms/selecionar.mp3");
@@ -211,5 +214,7 @@ botoes.forEach(botao => {
     const somClick = new Audio("Banco de Soms/confirmar.mp3");
     somClick.volume = 0.2;
     somClick.play();
+
+    botao.classList.add("tremendo");
   });
 });

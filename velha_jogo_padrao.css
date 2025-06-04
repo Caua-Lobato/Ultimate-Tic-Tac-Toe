@@ -26,24 +26,26 @@
   transform: translate(-50%, -50%);
   font-size: 44px;
   font-weight: bold;
-  animation-fill-mode: forwards;
-  animation: girarTexto 0.7s linear;
   color: white;
   z-index: 10;
   text-shadow: 9px 7px 3px black;
   background: transparent;
+  animation: crescer 0.7s ease forwards;
 }
 
-@keyframes girarTexto {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+@keyframes crescer {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(180deg) scale(1.3);
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg) scale(1);
-  }
+}
+
+#vez-texto.vitoria.pulsando {
+  animation: pulsarTexto 1.5s ease-in-out infinite;
 }
 
 @keyframes pulsarTexto {
@@ -229,6 +231,18 @@ button:hover {
   transform: scale(1.05);
   text-decoration: underline;
 }
+@keyframes tremer {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(2px, -2px); }
+  50%  { transform: translate(-2px, 2px); }
+  75%  { transform: translate(2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+button.tremendo {
+  animation: tremer 0.3s;
+}
+
 #painel-moeda{
   position: absolute;
   top: 50%;
