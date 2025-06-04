@@ -1,6 +1,10 @@
 const tabuleiro = document.getElementById("tabuleiro");
 const celulas = document.querySelectorAll(".celula");
 const vezTexto = document.getElementById("vez-texto");
+const btnReiniciar = document.getElementById("btn-reiniciar");
+const painelMoeda = document.getElementById("painel-moeda");
+const animacaoMoeda = document.getElementById("animacao-moeda");
+const musicaVitoria = document.getElementById("audio-vitoria");
 
 window.addEventListener("DOMContentLoaded", () => {
   tabuleiro.classList.add("animar-cair");
@@ -15,8 +19,8 @@ musicaFundo.play();
 
 let musicaAtiva = true;
 
-const jogadorInicial = localStorage.getItem("jogadorInicial") || "X";
-let turnoX = jogadorInicial === "X"; // quem começa de verdade
+let vezAtual = localStorage.getItem("jogadorInicial") || "X";
+let turnoX = vezAtual === "X"; // quem começa de verdade
 
 function criarElementoVoador() {
   const fundo = document.getElementById("fundo-animado");
@@ -26,25 +30,21 @@ function criarElementoVoador() {
   elemento.classList.add("elemento-voador");
   elemento.textContent = simbolo;
 
-  // Posição inicial aleatória horizontalmente, e bottom perto de zero (no fundo)
   const left = Math.random() * window.innerWidth; 
   elemento.style.left = `${left}px`;
-  elemento.style.bottom = `0px`; // começa exatamente no fundo
+  elemento.style.bottom = `0px`;
 
   fundo.appendChild(elemento);
 
   setTimeout(() => {
     fundo.removeChild(elemento);
-  }, 2500); // tempo da animação
+  }, 2500);
 }
 
-// Criar novos elementos voadores a cada 130ms (ajuste se quiser mais ou menos)
 setInterval(criarElementoVoador, 130);
 
+atualizarFundo();
 
-atualizarFundo(); // aplica a cor certa e mostra o texto de turno
-
-// Cria a matriz do estado
 let estado = [
   ["", "", ""],
   ["", "", ""],
@@ -64,19 +64,16 @@ function atualizarFundo() {
 }
 
 function verificarVitoria(simbolo) {
-  // Linhas
   for (let i = 0; i < 3; i++) {
     if (estado[i].every(celula => celula === simbolo)) return true;
   }
 
-  // Colunas
   for (let j = 0; j < 3; j++) {
     if (estado[0][j] === simbolo && estado[1][j] === simbolo && estado[2][j] === simbolo) {
       return true;
     }
   }
 
-  // Diagonais
   if (
     (estado[0][0] === simbolo && estado[1][1] === simbolo && estado[2][2] === simbolo) ||
     (estado[0][2] === simbolo && estado[1][1] === simbolo && estado[2][0] === simbolo)
@@ -99,12 +96,8 @@ celulas.forEach((celula, index) => {
 
       if (verificarVitoria(simbolo)) {
         vezTexto.textContent = `Jogador ${simbolo} venceu!`;
-        vezTexto.classList.add("vitoria"); // aplica estilo animado
+        vezTexto.classList.add("vitoria");
 
-        // Toca o som de vitória
-        const musicaVitoria = document.getElementById("audio-vitoria");
-
-        // Reduz o volume da música de fundo suavemente
         const fadeOut = setInterval(() => {
           if (musicaFundo.volume > 0.0005) {
             musicaFundo.volume -= 0.0001;
@@ -114,15 +107,12 @@ celulas.forEach((celula, index) => {
           }
         }, 50);
 
-        // Toca a música de vitória
         musicaVitoria.currentTime = 0;
         musicaVitoria.volume = 0.2;
         musicaVitoria.play();
 
-        // Quando a música de vitória terminar, volta o volume ao normal
         musicaVitoria.onended = () => {
           if (!musicaAtiva) return;
-          
           const fadeIn = setInterval(() => {
             if (musicaFundo.volume < 0.5) {
               musicaFundo.volume += 0.01;
@@ -133,16 +123,14 @@ celulas.forEach((celula, index) => {
           }, 50);
         };
 
-
         celulas.forEach(c => c.style.pointerEvents = "none");
 
-      setTimeout(() => {
+        setTimeout(() => {
           vezTexto.style.animation = "pulsarTexto 2.1s ease-in-out infinite";
-        }, 850); // espera o tempo da rotação
+        }, 850);
         return;
       }
 
-      // Verifica empate
       const empate = estado.flat().every(c => c !== "");
       if (empate) {
         vezTexto.textContent = "Empate!";
@@ -157,10 +145,71 @@ celulas.forEach((celula, index) => {
   });
 });
 
-atualizarFundo();
-
 function mudarTurno(novoTurno) {
   const body = document.body;
   body.classList.remove('turno-x', 'turno-o');
   body.classList.add(novoTurno);
 }
+
+function reiniciarComSorteio() {
+  const jogadorSorteado = Math.random() < 0.5 ? "X" : "O";
+  localStorage.setItem("jogadorInicial", jogadorSorteado);
+  vezTexto.textContent = "";
+  painelMoeda.classList.remove("oculto");
+
+  animacaoMoeda.src = jogadorSorteado === "X"
+    ? "Banco de Imagens/X-moeda.gif"
+    : "Banco de Imagens/circulo-moeda.gif";
+
+  animacaoMoeda.style.width = "330px";
+  animacaoMoeda.style.height = "auto";
+
+  setTimeout(() => {
+    vezTexto.textContent = `Jogador ${jogadorSorteado === "X" ? "✖" : "〇"} começa!`;
+
+    setTimeout(() => {
+      painelMoeda.classList.add("oculto");
+      reiniciarJogo(jogadorSorteado);
+    }, 1000);
+  }, 2000);
+}
+
+function reiniciarJogo(jogadorInicial) {
+  estado = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+  ];
+
+  celulas.forEach(celula => {
+    celula.textContent = "";
+    celula.style.pointerEvents = "auto";
+    celula.classList.remove("vencedor");
+  });
+
+  document.body.classList.remove("turno-x", "turno-o", "empate");
+  vezTexto.classList.remove("vitoria");
+  vezTexto.style.animation = "none";
+
+  vezAtual = jogadorInicial;
+  turnoX = jogadorInicial === "X";
+  atualizarFundo();
+}
+
+btnReiniciar.addEventListener("click", reiniciarComSorteio);
+
+atualizarFundo();
+
+botoes.forEach(botao => {
+  botao.addEventListener("mouseenter", () => {
+    const somHover = new Audio("Banco de Soms/selecionar.mp3");
+    somHover.volume = 0.2;
+    somHover.play();
+  });
+
+  botao.addEventListener("click", () => {
+    const somClick = new Audio("Banco de Soms/confirmar.mp3");
+    somClick.volume = 0.2;
+    somClick.play();
+  });
+});

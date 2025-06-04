@@ -201,3 +201,54 @@ body.empate {
   animation-delay: 0.3s;
 }
 
+.botoes{
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+}
+
+button{
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: white;
+  font-style: italic;
+  font-family: 'Press Start 2P', monospace;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 transparent;
+}
+button:hover {
+  background-color: #000000d4;
+  color: #E54FE2;
+  box-shadow: 0 0 10px #6a0dad, 0 0 20px #6a0dad;
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+#painel-moeda{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#painel-moeda.oculto{
+  display: none;
+}
+#animacao-moeda{
+  width: 180px;
+  height: auto;
+}
+.oculto{
+  display: none;
+}

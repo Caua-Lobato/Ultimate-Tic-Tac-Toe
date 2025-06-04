@@ -12,7 +12,7 @@
     <audio id="audio-vitoria" src="Banco de Soms/winning-218995.mp3" preload="auto"></audio>
     <div id="fundo-animado"></div>
     
-    <body class="modo-jogo-padrao">
+    <div class="modo-jogo-padrao">
         <h1 id="vez-texto">Jogador ✖ começa!</h1>
 
         <div id="tabuleiro">
@@ -26,8 +26,15 @@
             <div class="celula" data-index="7"></div>
             <div class="celula" data-index="8"></div>
         </div>
+        <div id="painel-moeda" class="oculto">
+            <img id="animacao-moeda" src="" alt="Animação da moeda">
+            <div id="vez-texto"></div>
+        </div>
+    </div>
+    <div class="botoes">
+        <button id="btn-reiniciar">Reiniciar</button>
+        <button onclick="window.location.href='velha.html'">Voltar</button>
+    </div>
         <script src="velha_jogo_padrao.js"></script>
     </body>
-    
-</body>
 </html>
