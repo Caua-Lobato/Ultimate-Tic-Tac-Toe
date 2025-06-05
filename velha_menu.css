@@ -246,3 +246,10 @@ input[type="range"]::-webkit-slider-thumb {
   color: white;
   font-family: 'Press Start 2P', monospace;
 }
+#painel-config-bot{
+  margin-top: 160px;
+}
+.simbolo-escolha:hover{
+  transform: scale(1.5px);
+  background-color: rgba(255, 255, 255, 0.412);
+}

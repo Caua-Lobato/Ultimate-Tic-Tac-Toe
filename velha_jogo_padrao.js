@@ -90,6 +90,9 @@ celulas.forEach((celula, index) => {
     const coluna = index % 3;
 
     if (estado[linha][coluna] === "") {
+      const somCliqueCelula = new Audio("Banco de Soms/select-sound-121244.mp3");
+      somCliqueCelula.volume = 0.99;
+      somCliqueCelula.play();
       const simbolo = turnoX ? "✖" : "〇";
       estado[linha][coluna] = simbolo;
       celula.textContent = simbolo;

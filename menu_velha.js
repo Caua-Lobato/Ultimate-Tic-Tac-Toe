@@ -247,3 +247,84 @@ function sortearPrimeiroJogador() {
     }, 1000);
   }, 2000);
 }
+
+const painelConfigBot = document.getElementById('painel-config-bot');
+const btnPvBot = document.getElementById('pvbot');
+const botoesDificuldade = document.querySelectorAll('.botao-dificuldade');
+const simbolos = document.querySelectorAll('.simbolo-escolha');
+const btnConfirmarBot = document.getElementById('confirmar-config-bot');
+
+let dificuldadeSelecionada = null;
+let simboloSelecionado = null;
+
+// Abrir painel de configuração quando clicar em "Player vs Bot"
+btnPvBot.addEventListener('click', () => {
+    fecharTodosOsPaineis(false);
+    painelConfigBot.classList.remove('oculto');
+    painelJogo.classList.remove('oculto');
+});
+
+// Seleção de dificuldade
+botoesDificuldade.forEach(botao => {
+    botao.addEventListener('click', () => {
+        dificuldadeSelecionada = botao.dataset.dificuldade;
+
+        botoesDificuldade.forEach(b => b.classList.remove('selecionado'));
+        botao.classList.add('selecionado');
+    });
+});
+
+// Seleção de símbolo
+const etapaSimbolo = document.getElementById("etapa-simbolo");
+const etapaDificuldade = document.getElementById("etapa-dificuldade");
+
+simbolos.forEach(img => {
+  img.addEventListener('click', () => {
+    simboloSelecionado = img.dataset.simbolo;
+
+    simbolos.forEach(i => i.classList.remove('selecionado'));
+    img.classList.add('selecionado');
+
+    // Passa para a próxima etapa
+    etapaSimbolo.classList.add('oculto');
+    etapaDificuldade.classList.remove('oculto');
+  });
+});
+
+
+// Confirmar e iniciar o jogo com as configurações
+btnConfirmarBot.addEventListener('click', () => {
+    if (!dificuldadeSelecionada || !simboloSelecionado) {
+        alert("Selecione a dificuldade e o símbolo!");
+        return;
+    }
+
+    // Sorteio para decidir quem começa
+    const jogadorComeca = Math.random() < 0.5 ? "player" : "bot";
+
+    // Salvar no localStorage
+    localStorage.setItem('dificuldade', dificuldadeSelecionada);
+    localStorage.setItem('simboloPlayer', simboloSelecionado);
+    localStorage.setItem('simboloBot', simboloSelecionado === 'X' ? 'O' : 'X');
+    localStorage.setItem('quemComeca', jogadorComeca);
+
+    // Redirecionar para a página do modo bot
+    window.location.href = 'velha_jogo_bot.html';
+});
+
+function fecharTodosOsPaineis() {
+  const paineis = document.querySelectorAll('.painel');
+  paineis.forEach(painel => painel.classList.add('oculto'));
+  options.classList.remove('escondido');
+}
+
+function fecharTodosOsPaineis(mostrarMenu = true) {
+  const paineis = document.querySelectorAll(".painel");
+  paineis.forEach(painel => painel.classList.add("oculto"));
+
+  if (mostrarMenu) {
+    options.classList.remove("escondido");
+  } else {
+    options.classList.add("escondido");
+  }
+}

@@ -13,7 +13,7 @@
     <div id="fundo-animado"></div>
         <div id="menu">
             <img id="Uttt-logo" src="Banco de Imagens/Logo 1.0.png" alt="logo">
-            <p id="mensagem">[   pressione barra de espaço ]</p>
+            <p id="mensagem">[ pressione barra de espaço ]</p>
 
             <div id="options" class="escondido">
                 <button id="btn-jogar">Jogar</button>
@@ -74,14 +74,30 @@
         </div>
         <button onclick="fecharPainel()">Voltar</button>
     </div>
+
     <div id="painel-moeda" class="painel oculto">
         <img id="animacao-moeda" src="Banco de Imagens/circulo-moeda.gif" alt="Animação da moeda">
     </div>
 
     <p id="vez-texto"></p>
 
-    <div id="painel-jogo" class="painel oculto">
-    <!-- Conteúdo do jogo -->
+    <div id="painel-config-bot" class="painel oculto">
+        <div id="etapa-simbolo">
+            <p>[ Escolha seu símbolo ]</p>
+            <img src="..." data-simbolo="X" class="simbolo-escolha" />
+            <img src="..." data-simbolo="O" class="simbolo-escolha" />
+            <button onclick="fecharPainel()">Voltar</button>
+        </div>
+
+        <div id="etapa-dificuldade" class="oculto">
+            <p>[ Escolha a dificuldade ]</p>
+            <button class="botao-dificuldade" data-dificuldade="facil">Fácil</button>
+            <button class="botao-dificuldade" data-dificuldade="media">Média</button>
+            <button class="botao-dificuldade" data-dificuldade="dificil">Difícil</button>
+            <br/>
+            <button id="confirmar-config-bot">Confirmar</button>
+            <button onclick="fecharPainel()">Voltar</button>
+        </div>
     </div>
     <script src="menu_velha.js"></script>
 </body>
